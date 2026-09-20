@@ -126,6 +126,8 @@ export async function editMedia(req, res) {
         detail: "Movie or Series already exists, choose another Name",
       });
     }
+
+    
     const media = await Media.findOneAndUpdate({ _id: id }, body, {
       returnDocument: "after",
     });
