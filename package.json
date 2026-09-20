@@ -1,0 +1,28 @@
+{
+  "name": "aa-movies-backend",
+  "version": "1.0.0",
+  "description": "This is the backend for My web design project known as AA-Movies. It is powered by NodeJs and the database being used is MongoDB",
+  "keywords": [
+    "AA-Movies",
+    "Final-project"
+  ],
+  "license": "ISC",
+  "author": "Ayomide Amodu Ezekiel",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "joi": "^18.2.8",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.5",
+    "morgan": "^1.12.0",
+    "nodemon": "^3.1.14"
+  }
+}
