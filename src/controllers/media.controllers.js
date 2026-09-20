@@ -1,4 +1,5 @@
 import Media from "../models/media.models.js";
+import { mediaValidator } from "../validators/media.validators.js";
 
 export async function getAllMedia(req, res) {
   try {
@@ -71,14 +72,35 @@ export async function addMedia(req, res) {
     return res.status(400).json({ detail: "Request body is required" });
   }
 
-  const { poster, name, description, episodes } = body;
+  //  * const { poster, name, description, episodes } = body;
+
+  const { error, value } = mediaValidator.validate(body, { abortEarly: false });
+
+  if (error) {
+    return res.status(400).send({ errors: error.message });
+  }
+
+  //   console.log(value);
+
+  const { poster, name, description, episodes, type } = value;
 
   try {
+    const alreadyExistingMedia = await Media.findOne({ name: name });
+    if (alreadyExistingMedia) {
+      return res.status(409).json({ detail: "Movie or Series already exists" });
+    }
+
+    if (type == "Movie" && episodes.length > 1) {
+      return res
+        .status(400)
+        .json({ detail: "Movie cannot have more than one episode" });
+    }
     const media = await Media.create({
       poster,
       name,
       description,
       episodes,
+      type,
     });
 
     res.send({ detail: "Media added Successfully", media });
@@ -96,7 +118,14 @@ export async function editMedia(req, res) {
   if (!body) {
     return res.status(400).json({ detail: "Request body is required" });
   }
+  const { name } = body;
   try {
+    const alreadyExistingMedia = await Media.findOne({ name: name });
+    if (alreadyExistingMedia) {
+      return res.status(409).json({
+        detail: "Movie or Series already exists, choose another Name",
+      });
+    }
     const media = await Media.findOneAndUpdate({ _id: id }, body, {
       returnDocument: "after",
     });
