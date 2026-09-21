@@ -3,7 +3,7 @@ import {
   signUp,
   getAllUsers,
   signIn,
-  getUserRole,
+  getUser,
   refreshAccessToken,
   refreshTokens,
 } from "../controllers/user.controller.js";
@@ -15,6 +15,6 @@ router.post("/signin", signIn);
 router.post("/accesstoken", refreshAccessToken);
 router.post("/token", refreshTokens);
 router.get("/", getAllUsers);
-router.get("/userrole", [authenticate], getUserRole);
+router.get("/user", [authenticate], getUser);
 
 export default router;

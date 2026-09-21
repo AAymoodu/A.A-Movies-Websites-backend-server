@@ -8,7 +8,6 @@ import {
 import jwt from "jsonwebtoken";
 import env from "../config/env.js";
 
-
 export async function signUp(req, res) {
   const body = req.body;
   // checks if there is a request body
@@ -111,11 +110,13 @@ export async function signIn(req, res) {
   }
 }
 
-export async function getUserRole(req, res) {
+export async function getUser(req, res) {
   const user = req.user;
-  const { role: userRole } = user;
+  // console.log(user);
 
-  res.json(userRole);
+  const { role: userRole, username } = user;
+
+  res.json({userRole, username});
 }
 
 export async function refreshAccessToken(req, res) {

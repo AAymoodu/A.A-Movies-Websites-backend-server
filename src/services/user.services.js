@@ -8,7 +8,7 @@ export function generateAccessToken(user) {
       role: user.role,
     },
     env.JWT_ACCESS_KEY,
-    { expiresIn: "10m" },
+    { expiresIn: "20m" },
   );
 }
 
