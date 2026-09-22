@@ -77,7 +77,7 @@ export async function addMedia(req, res) {
   const { error, value } = mediaValidator.validate(body, { abortEarly: false });
 
   if (error) {
-    return res.status(400).send({ errors: error.message });
+    return res.status(400).send({ detail: error.message });
   }
 
   //   console.log(value);
@@ -127,7 +127,6 @@ export async function editMedia(req, res) {
       });
     }
 
-    
     const media = await Media.findOneAndUpdate({ _id: id }, body, {
       returnDocument: "after",
     });
