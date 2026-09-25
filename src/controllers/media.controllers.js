@@ -149,7 +149,7 @@ export async function deleteMedia(req, res) {
       return res.status(404).send({ detail: "Media not found" });
     }
 
-    res.send({ message: "Media deleted successfully" });
+    res.send({ detail: "Media deleted successfully" });
   } catch (err) {
     res.status(500).json({ detail: "An error occurred: " + err.message });
     return;
