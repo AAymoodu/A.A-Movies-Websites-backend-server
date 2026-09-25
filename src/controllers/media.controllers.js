@@ -133,7 +133,7 @@ export async function editMedia(req, res) {
     if (!media) {
       return res.status(404).send({ detail: "Media not found" });
     }
-    res.send(media);
+    res.send({ detail: "Media Edited Successfully", media });
   } catch (err) {
     res.status(500).json({ detail: "An error occurred: " + err.message });
     return;
